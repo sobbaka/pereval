@@ -1,0 +1,17 @@
+venv
+db.sqlite3
+*/migrations/*
+!*/migrations/__init__.py
+.env
+*.json
+__pycache__/
+**/__pycache__/
+*38.pyc
+/*cpython-38.pyc
+.idea
+*/test_test.py
+*.pyc
+json.txt
+tests.py
+pereval-2022-02-22.dump
+pereval_2022-02-22-2021.sql
