@@ -9,9 +9,9 @@ from django.db import models
 
 
 class PerevalAdded(models.Model):
-    date_added = models.DateTimeField(blank=True, null=True)
-    raw_data = models.TextField(blank=True, null=True)  # This field type is a guess. JSON
-    images = models.TextField(blank=True, null=True)  # This field type is a guess. M2M
+    date_added = models.DateTimeField()
+    raw_data = models.TextField()  # This field type is a guess. JSON
+    images = models.TextField()  # This field type is a guess. M2M
 
     class Meta:
         managed = False

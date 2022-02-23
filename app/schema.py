@@ -1,7 +1,5 @@
-from jsonschema import validate
-import json
 
-schema_1 = {
+schema = {
   "type": "object",
   "properties": {
     "id": {"type": "string"},
@@ -11,35 +9,33 @@ schema_1 = {
     "connect": {"type": "string"},  # что соединяет
 
     "add_time": {"type": "string"},
-    "user": {},  # допустимы поля id, email, phone, fam, name, otc
+    "user": {"type": "object"},  # допустимы поля id, email, phone, fam, name, otc
 
     "coords": {
       "latitude": {"type": "string"},
       "longitude": {"type": "string"},
       "height": {"type": "string"},
+      "required": ["latitude", "longitude", "height"]
     },
+
     "type": {"type": "string"},  # константа для всех запросов приложения
 
     "level": {
       "winter": {"type": "string"},  # текстовое поле "Категория трудности"
       "summer": {"type": "string"},
       "autumn": {"type": "string"},
-      "spring": {"type": "string"}
+      "spring": {"type": "string"},
+      "required": ["winter", "summer", "autumn", "spring"]
       },
 
-      "images": {
+    "images": {
         "type": "array",
         "minItems": 1,
-      }
+      },
+
     },
-  "required": ["beautyTitle", "images"]
-  }
+  "required": ["id", "beautyTitle", "title", "other_titles", "connect", "user", "coords", "type", "level", "images"],
+  "additionalProperties": False
 
-
-with open("json.txt", "r") as file:
-  data = file.read()
-  json = json.loads(data)
-
-  validate(json, schema_1)
-
+}
 
