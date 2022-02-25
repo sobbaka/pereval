@@ -8,10 +8,13 @@ import json
 from datetime import datetime
 
 from app.models import PerevalImages, PerevalAdded
-from app.api.serializers import PerevalAddedSerializer
+from app.api.serializers import PerevalAddedSerializer, PerevalAddedSpecialSerializer
 from app.schema import schema
 
-@api_view(['GET', 'POST'])
+from drf_yasg.utils import swagger_auto_schema
+
+@swagger_auto_schema(methods=['post',],  request_body=PerevalAddedSpecialSerializer)
+@api_view(['POST', ])
 def api_recieve_data(request):
 
     if request.method == 'POST':
@@ -19,7 +22,8 @@ def api_recieve_data(request):
         valid = Draft7Validator(schema).is_valid(request.data)
 
         if not valid:
-            errors = [error.message for error in Draft7Validator(schema).iter_errors(request.data)]
+            errors_lst = [error.message for error in Draft7Validator(schema).iter_errors(request.data)]
+            errors = {'validation_errors': errors_lst}
             return Response(data=errors, status=status.HTTP_400_BAD_REQUEST)
 
         try:
@@ -56,7 +60,7 @@ def api_recieve_data(request):
                               )
 
         id = PerevalAdded.objects.last().id + 1
-        serializer = PerevalAddedSerializer(data={'pkey':id, 'date_added': date_added_str, 'raw_data': raw_data, 'images': images})
+        serializer = PerevalAddedSerializer(data={'pkey': id, 'date_added': date_added_str, 'raw_data': raw_data, 'images': images})
         if serializer.is_valid():
             serializer = serializer.save()
             data = {"id": serializer.id}
