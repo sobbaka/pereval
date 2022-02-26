@@ -36,6 +36,5 @@ schema = {
     },
   "required": ["id", "beautyTitle", "title", "other_titles", "connect", "user", "coords", "type", "level", "images"],
   "additionalProperties": False
-
 }
 

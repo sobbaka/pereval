@@ -2,18 +2,18 @@ from jsonschema.validators import Draft7Validator
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from jsonschema import validate
-from jsonschema.exceptions import ValidationError
+
 import json
 from datetime import datetime
 
 from app.models import PerevalImages, PerevalAdded
-from app.api.serializers import PerevalAddedSerializer, PerevalAddedSpecialSerializer
+from app.api.serializers import PerevalAddedSerializer, PerevalSchemaSerializer, PerevalAddedSpecialSerializer
 from app.schema import schema
 
 from drf_yasg.utils import swagger_auto_schema
 
-@swagger_auto_schema(methods=['post',],  request_body=PerevalAddedSpecialSerializer)
+
+@swagger_auto_schema(methods=['post',], request_body=PerevalSchemaSerializer)
 @api_view(['POST', ])
 def api_recieve_data(request):
 
