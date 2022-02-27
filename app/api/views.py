@@ -7,7 +7,7 @@ import json
 from datetime import datetime
 
 from app.models import PerevalImages, PerevalAdded
-from app.api.serializers import PerevalAddedSerializer, PerevalSchemaSerializer, PerevalAddedSpecialSerializer
+from app.api.serializers import PerevalAddedSerializer, PerevalSchemaSerializer
 from app.schema import schema
 
 from drf_yasg.utils import swagger_auto_schema
