@@ -1,8 +1,11 @@
 from rest_framework import serializers
 from app.models import PerevalAdded
-from django.contrib.postgres.fields import ArrayField
 from django.db import models
-from django.contrib.postgres.fields import JSONField
+
+try:
+    from django.db.models import JSONField
+except ImportError:
+    from django.contrib.postgres.fields import JSONField
 
 
 from drf_yasg import openapi
